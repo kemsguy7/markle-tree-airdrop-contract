@@ -13,8 +13,7 @@ error AlreadyClaimed();
 error NoTokensLeft();
 error InvalidMerkleProof();
 
-abstract contract KemsguyAirdrop is Ownable {
-
+contract KemsguyAirdrop is Ownable {
     // State variables
     ERC20 public token;
     bytes32 public merkleRoot;
@@ -32,7 +31,7 @@ abstract contract KemsguyAirdrop is Ownable {
         address _token,      
         uint _amount,
         bytes32 _merkleRoot
-    ) {
+    ) Ownable(msg.sender) {
         if (_token == address(0)) revert InvalidTokenAddress();
         if (_amount == 0) revert InvalidAmount();
         
